@@ -86,9 +86,9 @@ a:visited {
 .checks {
   float: left;
 }
-.checks:not(:target) {
+#taskcontainer:not(:target) .checks {
   transform: translateY(-10000px);
 }
-.checks:target {
+#taskcontainer:target .checks {
   transform: translateY(0px);
 }

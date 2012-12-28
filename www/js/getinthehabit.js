@@ -44,7 +44,7 @@ define(function(require){
         }
         var intro = document.getElementById("intro");
         intro.style.display = "none";
-
+        var taskcontainer = document.getElementById("taskcontainer");
         // Create Container Div
         var newItemContainer = document.createElement('div');
 
@@ -66,7 +66,8 @@ define(function(require){
         var content = document.createTextNode(taskName);
         newItem.appendChild(content);
         newItemContainer.appendChild(newItem);
-        document.body.insertBefore(newItemContainer, intro);
+
+        taskcontainer.appendChild(newItemContainer);
       }
       var addItem = document.getElementById("addItem");
       addItem.addEventListener("click", function (){
