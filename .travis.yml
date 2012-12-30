@@ -6,5 +6,5 @@ env:
     - secure: "GPY4qtNsRhGSTeR7DGrYbtarUPGWSYWWeZCkhJFbxz1UN8+sAkplrmwKgR7K\ng6XGZEdo9TJOtpKKgwWlAyjKhfpOVw3vDCNcuK9vXX1ZaHKpZfj/V++y7iGs\nlSVamKr9d6JYMGqKkaw4Yf9vu18cBIIdUms+PDCFiqJgusbr45c="
     - secure: "lwn2o5Nr88RjzpF2KJ0aeaFt4jBv6GuC2YxY4taEZINpeJ/Ol+lITh0Unm/S\nGXZ2/znQ+A/18HtLYlcEw8UzWdCIF7HUz3T9GcQzkug9lMxqHXZ2km1Jk4Zh\nJQqYpki3m+LlxrMx5ywchFX+6fyk8OVZSskazosxE6xEIOguJvI="
 before_install:
-  - pip install selenium
-  - pip install pytest
+  - sudo pip install selenium
+  - sudo pip install pytest
