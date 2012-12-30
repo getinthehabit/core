@@ -12,5 +12,8 @@
       "zepto": "github:madrobby/zepto/v0.8"
     },
     "baseUrl": "www/js/lib"
+  },
+  "scripts": {
+    "test": "py.test "
   }
 }
