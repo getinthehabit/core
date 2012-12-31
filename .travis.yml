@@ -8,3 +8,4 @@ env:
 before_install:
   - sudo pip install selenium
   - sudo pip install pytest
+  - sudo pip install pytest-xdist

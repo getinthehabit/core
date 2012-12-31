@@ -14,6 +14,6 @@
     "baseUrl": "www/js/lib"
   },
   "scripts": {
-    "test": "py.test "
+    "test": "py.test -n 3"
   }
 }
