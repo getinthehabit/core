@@ -100,16 +100,17 @@ define(function(require){
             //TODO(David) When we share state with a server we need to think about doing it here.
           }
         };
+      });
+      var loaded = function() {
+        var db;
+        var request = window.indexedDB.open("habitual", 1);
         request.onupgradeneeded = function(event) {
+          console.log("onUpgradedNeeded called")
           db = event.target.result;
           var objectStore = db.createObjectStore("tasks", 
               { keyPath: "name" });
           objectStore.createIndex("task", "task", { unique: true });
         };
-      });
-      var loaded = function() {
-        var db;
-        var request = window.indexedDB.open("habitual", 1);
         request.onerror = function (event) {
         };
         request.onsuccess = function (event) {
@@ -145,5 +146,9 @@ define(function(require){
           };
         }
       };
-      require.ready(loaded());
+      require(['domReady'], function (domReady) {
+        domReady(function () {
+          loaded()
+        });
+      });
 });

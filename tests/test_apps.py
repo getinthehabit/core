@@ -10,12 +10,11 @@ class TestApp(unittest.TestCase):
 
     def setUp(self):
         try:
-            print os.environ
             os.environ['SAUCE_USERNAME']
             desired_capabilities = webdriver.DesiredCapabilities.FIREFOX
             #desired_capabilities['platform'] = 'Mac 10.8'
             #desired_capabilities['version'] = '6'
-            desired_capabilities['version'] = '17'
+            desired_capabilities['version'] = '18'
             desired_capabilities['platform'] = 'Windows 2003'
             desired_capabilities['name'] = 'Testing Get In The Habit'
             print "about to do remote"
@@ -34,7 +33,18 @@ class TestApp(unittest.TestCase):
         WebDriverWait(self.driver, 5).until(lambda driver : driver.find_element_by_id("close").is_displayed())
         close_button = self.driver.find_element_by_id('close')
         close_button.click()
+        self.assertFalse(close_button.is_displayed())
+
+    def test_that_we_add_new_item_and_check_it_is_still_there_after_a_refresh(self):
+        self.driver.find_element(By.ID , 'extraslink').click()
+        WebDriverWait(self.driver, 5).until(lambda driver : driver.find_element_by_id("close").is_displayed())
+        self.driver.find_element(By.ID, "task").send_keys("eat more cheese")
+        self.driver.find_element(By.ID, "addItem").click()
+
+        # Refresh and if still there then we are good!
+        self.driver.refresh()
+        WebDriverWait(self.driver, 5).until(lambda driver : driver.find_element(By.CSS_SELECTOR, ".task").is_displayed())
+
 
     def tearDown(self):
         self.driver.quit()
-
