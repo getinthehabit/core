@@ -12,18 +12,17 @@ class TestApp(unittest.TestCase):
         try:
             os.environ['SAUCE_USERNAME']
             desired_capabilities = webdriver.DesiredCapabilities.FIREFOX
-            #desired_capabilities['platform'] = 'Mac 10.8'
-            #desired_capabilities['version'] = '6'
-            desired_capabilities['version'] = '18'
-            desired_capabilities['platform'] = 'Windows 2003'
+            desired_capabilities['version'] = os.environ['SAUCE_BROWSER_VERSION']
+            desired_capabilities['platform'] = os.environ['SAUCE_PLATFORM']
             desired_capabilities['name'] = 'Testing Get In The Habit'
-            print "about to do remote"
+
             self.driver = webdriver.Remote(
                 desired_capabilities=desired_capabilities,
                 command_executor="http://%s:%s@ondemand.saucelabs.com:80/wd/hub" % (os.environ['SAUCE_USERNAME'],
                                                                                     os.environ['SAUCE_ACCESS_KEY'])
             )
-        except:
+        except Exception as e:
+            print e
             self.driver = webdriver.Firefox()
         self.driver.set_window_size(320, 480)
         self.driver.get("http://localhost:8008")
@@ -43,7 +42,7 @@ class TestApp(unittest.TestCase):
 
         # Refresh and if still there then we are good!
         self.driver.refresh()
-        WebDriverWait(self.driver, 5).until(lambda driver : driver.find_element(By.CSS_SELECTOR, ".task").is_displayed())
+        WebDriverWait(self.driver, 10).until(lambda driver : driver.find_element(By.CSS_SELECTOR, ".task").is_displayed())
 
 
     def tearDown(self):
